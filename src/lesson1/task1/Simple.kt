@@ -146,8 +146,8 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
 fun numberRevert(number: Int): Int {
-    var n1 = number % 10 * 100
-    var n2 = number / 10 % 10 * 10
-    var n3 = number / 100
+    val n1 = number % 10 * 100
+    val n2 = number / 10 % 10 * 10
+    val n3 = number / 100
     return n1 + n2 + n3
 }
