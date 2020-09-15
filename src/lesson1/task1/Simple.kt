@@ -80,7 +80,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int) = (hours * 3600) + (minutes 
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
     val const = 4.445
-    return ((sagenes * 48.0 * const) + (arshins * 16.0 * const) + (vershoks * const)) / 100.0
+    return (const * ((sagenes * 48.0) + (arshins * 16.0) + (vershoks))) / 100.0
 }
 
 /**
@@ -90,8 +90,10 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
-    val radian = (deg + (min / 60) + (sec / 3600)) * (PI / 180)
-    return radian
+    val constDeg = (deg * PI / 180)
+    val constMin = (min * PI / (180 * 60))
+    val constSec = (sec * PI / (180 * 3600))
+    return constDeg + constMin + constSec
 }
 
 /**
@@ -100,9 +102,8 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
  * Найти длину отрезка, соединяющего точки на плоскости с координатами (x1, y1) и (x2, y2).
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
-    return sqrt((x1 - x2).pow(2) + (y1 - y2).pow(2))
-}
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = sqrt((x1 - x2).pow(2) + (y1 - y2).pow(2))
+
 
 /**
  * Простая (2 балла)
@@ -110,9 +111,8 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
  * Пользователь задает целое число, большее 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun thirdDigit(number: Int): Int {
-    return number / 100 % 10
-}
+fun thirdDigit(number: Int): Int = number / 100 % 10
+
 
 /**
  * Простая (2 балла)
@@ -134,10 +134,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double {
-    val pay: Double = ((1.0 + percent / 100.0).pow(3)) * initial
-    return pay
-}
+fun accountInThreeYears(initial: Int, percent: Int): Double = ((1.0 + percent / 100.0).pow(3)) * initial
 
 /**
  * Простая (2 балла)
