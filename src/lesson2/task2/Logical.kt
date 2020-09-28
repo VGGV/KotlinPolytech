@@ -64,7 +64,7 @@ fun daysInMonth(month: Int, year: Int): Int =
     } else {
         when (month) {
             2 -> 29
-            else -> 0
+            else -> month
         }
     }
 
