@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -147,7 +148,16 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var num = n
+    var newNum = 0
+    while (num > 0) {
+        val shift = num % 10
+        newNum = shift + newNum * 10
+        num /= 10
+    }
+    return newNum
+}
 
 /**
  * Средняя (3 балла)
@@ -158,7 +168,16 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var num = n
+    var result = 0
+    while (num > 0) {
+        result *= 10
+        result += num % 10
+        num /= 10
+    }
+    return result == n
+}
 
 /**
  * Средняя (3 балла)
@@ -191,6 +210,7 @@ fun sin(x: Double, eps: Double): Double = TODO()
  * Использовать kotlin.math.cos и другие стандартные реализации функции косинуса в этой задаче запрещается.
  */
 fun cos(x: Double, eps: Double): Double = TODO()
+
 
 /**
  * Сложная (4 балла)
