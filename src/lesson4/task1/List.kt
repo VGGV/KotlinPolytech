@@ -181,11 +181,11 @@ fun factorize(n: Int): List<Int> {
     var num = n
     var divider = 2
     val line = mutableListOf<Int>()
-    while (num >= 2) {
+    while (num > 1) {
         if (num % divider == 0) {
             num /= divider
             line.add(divider)
-        } else divider++
+        } else divider++ //сдвиг делителя
     }
     return line
 }
@@ -228,7 +228,16 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var const = 1
+    var result = 0
+
+    digits.reversed().forEach() {
+        result += it * const
+        const *= base
+    }
+    return result
+}
 
 /**
  * Сложная (4 балла)
@@ -252,7 +261,30 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
+fun alphabet(n: Int) {
+    val num: Array<String> = arrayOf("I", "IV", "V", "VI", "IX")
+    val numDozens: Array<String> = arrayOf("X", "XL", "L", "XC")
+    val numHundreds: Array<String> = arrayOf("C", "CD", "D", "DC", "CM")
+    val numThousand: Array<String> = arrayOf("M")
+}
+
+fun breaking(n: Int) {
+    val splitting = mutableListOf<Int>()
+    var buffer = 0
+    var number = n
+    while (number != 0) {
+        buffer = number % 10
+        number /= 10
+        splitting.add(buffer)
+    }
+    var const = 1
+    splitting.reversed().forEach() {
+
+    }
+}
+
 fun roman(n: Int): String = TODO()
+
 
 /**
  * Очень сложная (7 баллов)
@@ -261,4 +293,5 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
+
 fun russian(n: Int): String = TODO()
