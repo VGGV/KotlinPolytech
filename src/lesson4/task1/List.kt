@@ -232,7 +232,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
     var const = 1
     var result = 0
 
-    digits.reversed().forEach() {
+    digits.reversed().forEach{
         result += it * const
         const *= base
     }
@@ -261,27 +261,6 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun alphabet(n: Int) {
-    val num: Array<String> = arrayOf("I", "IV", "V", "VI", "IX")
-    val numDozens: Array<String> = arrayOf("X", "XL", "L", "XC")
-    val numHundreds: Array<String> = arrayOf("C", "CD", "D", "DC", "CM")
-    val numThousand: Array<String> = arrayOf("M")
-}
-
-fun breaking(n: Int) {
-    val splitting = mutableListOf<Int>()
-    var buffer = 0
-    var number = n
-    while (number != 0) {
-        buffer = number % 10
-        number /= 10
-        splitting.add(buffer)
-    }
-    var const = 1
-    splitting.reversed().forEach() {
-
-    }
-}
 
 fun roman(n: Int): String = TODO()
 

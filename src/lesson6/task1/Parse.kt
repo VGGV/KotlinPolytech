@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import kotlin.math.max
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -127,7 +129,37 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    try {
+        var max = 0
+        var num = 0
+        var mistake = false
+
+        jumps.forEach {
+            when (it) {
+                in '0'..'9' -> {
+                    if (mistake) {
+                        num = 0
+                        mistake = false
+                    }
+                    num = num * 10 + (it - '0')
+                }
+                '+' -> {
+                    mistake = true
+                    if (num > -1) max = num
+                }
+                ' ' -> mistake = true
+                '-' -> mistake = true
+                '%' -> mistake = true
+                else -> throw Exception()
+            }
+        }
+
+        return max
+    } catch (e: Exception) {
+        return -1
+    }
+}
 
 /**
  * Сложная (6 баллов)
@@ -138,7 +170,15 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    return if (Regex("""\d+(?:[\s]*[-+][\s]*\d+)*""").matches(expression))
+        expression.replace(" ", "")
+            .split(Regex("""(?=[-+])"""))
+            .map { it.toInt() }
+            .sum()
+    else
+        throw java.lang.IllegalArgumentException()
+}
 
 /**
  * Сложная (6 баллов)

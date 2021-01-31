@@ -75,9 +75,35 @@ fun deleteMarked(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  *
  */
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
-
-
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int?> {
+    val map = mutableMapOf<String, Int>()
+    for (string in substrings) {
+        map[string] = 0
+    }
+    var startIndex = 0
+    var counter = 0
+    for ((substring, _) in map) {
+        val string = if (substring in """[.\$^[]]""") "\\" + substring else substring
+        var separator =
+            Regex(string.toLowerCase()).find(
+                File(inputName).readLines().toString().toLowerCase(),
+                startIndex
+            )?.range?.start
+        while (separator != null) {
+            counter++
+            startIndex = separator + 1
+            separator =
+                Regex(string.toLowerCase()).find(
+                    File(inputName).readLines().toString().toLowerCase(),
+                    startIndex
+                )?.range?.start
+        }
+        map[substring] = counter
+        counter = 0
+        startIndex = 0
+    }
+    return map
+}
 /**
  * Средняя (12 баллов)
  *
@@ -92,7 +118,19 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    val text = File(inputName).readText()
+    File(outputName)
+        .writeText(
+            text.replace(Regex("""([жчшщ])([ыяю])""", RegexOption.IGNORE_CASE)){
+                val char = it.groupValues[2][0]
+                it.groupValues[1] + when (char.toLowerCase()){
+                    'ы' -> char - 19
+                    'я' -> char - 31
+                    'ю' -> char - 11
+                    else -> ""
+                }
+            }
+        )
 }
 
 /**
@@ -113,8 +151,9 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+
 }
+
 
 /**
  * Сложная (20 баллов)
