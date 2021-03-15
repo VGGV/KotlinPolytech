@@ -208,11 +208,12 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = list
-    .groupingBy { it }
-    .eachCount()
-    .filterValues { it != 1 }
-
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val result = mutableMapOf<String, Int>()
+    for (point in list) result[point] = result
+        .getOrDefault(point, 0) + 1
+    return result.filterValues { it != 1 }
+}
 /**
  * Средняя (3 балла)
  *
@@ -289,7 +290,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
 
     var shift = list.size - 1
     var zero = 0
-    while (zero != shift){
+    while (zero != shift) {
         val summa = sorted[zero].first + sorted[shift].first
 
         when {

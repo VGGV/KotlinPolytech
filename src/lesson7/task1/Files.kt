@@ -121,9 +121,9 @@ fun sibilants(inputName: String, outputName: String) {
     val text = File(inputName).readText()
     File(outputName)
         .writeText(
-            text.replace(Regex("""([жчшщ])([ыяю])""", RegexOption.IGNORE_CASE)){
+            text.replace(Regex("""([жчшщ])([ыяю])""", RegexOption.IGNORE_CASE)) {
                 val char = it.groupValues[2][0]
-                it.groupValues[1] + when (char.toLowerCase()){
+                it.groupValues[1] + when (char.toLowerCase()) {
                     'ы' -> char - 19
                     'я' -> char - 31
                     'ю' -> char - 11

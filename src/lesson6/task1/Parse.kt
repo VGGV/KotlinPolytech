@@ -2,6 +2,7 @@
 
 package lesson6.task1
 
+import java.lang.IllegalArgumentException
 import kotlin.math.max
 
 // Урок 6: разбор строк, исключения
@@ -171,13 +172,15 @@ fun bestHighJump(jumps: String): Int {
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int {
-    return if (Regex("""\d+(?:[\s]*[-+][\s]*\d+)*""").matches(expression))
-        expression.replace(" ", "")
-            .split(Regex("""(?=[-+])"""))
-            .map { it.toInt() }
-            .sum()
-    else
-        throw java.lang.IllegalArgumentException()
+    var resultat = 0
+    var mark = "+"
+    val split = expression.split(" ")
+    if (!expression.matches(Regex("""\d+(?:[\s]*[+-][\s]*\d+)*"""))) throw IllegalArgumentException()
+    for ((point, part) in split.withIndex()) {
+        if (point % 2 == 0) resultat += if (mark == "-") -part.toInt()
+        else part.toInt() else mark = part
+    }
+    return resultat
 }
 
 /**
